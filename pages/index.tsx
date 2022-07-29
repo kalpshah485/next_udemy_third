@@ -1,15 +1,27 @@
-import type { NextPage } from 'next';
-import { getFeaturedEvents } from '../dummy-data';
-import type { DUMMY_EVENT } from '../dummy-data';
+import type { GetStaticProps, NextPage } from 'next';
+import { getFeaturedEvents } from '../helpers/api-utils';
+import type { DUMMY_EVENT } from '../helpers/api-utils';
 import EventList from '../components/events/EventList';
 
-const Home: NextPage = () => {
-  const featuredEvents:DUMMY_EVENT[] = getFeaturedEvents();
+const Home: NextPage<{
+  events: DUMMY_EVENT[]
+}> = ({ events }) => {
   return (
     <div>
-      <EventList items={featuredEvents} />
+      <EventList items={events} />
     </div>
   )
 }
 
+export const getStaticProps:GetStaticProps = async () => {
+  const featuredEvents = await getFeaturedEvents();
+
+  return {
+    props: {
+      events: featuredEvents
+    }
+  }
+}
+
 export default Home;
+

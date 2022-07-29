@@ -1,12 +1,12 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import EventList from '../../components/events/EventList';
 import EventsSearch from '../../components/events/EventsSearch';
-import { DUMMY_EVENT, getAllEvents } from '../../dummy-data';
+import { DUMMY_EVENT, getAllEvents } from '../../helpers/api-utils';
 
-const Events: NextPage = () => {
-  const events: DUMMY_EVENT[] = getAllEvents();
-
+const Events: NextPage<{
+  events: DUMMY_EVENT[]
+}> = ({ events }) => {
   const router = useRouter();
 
   function findEventsHandler(year: string | undefined, month: string | undefined) {
@@ -20,6 +20,16 @@ const Events: NextPage = () => {
       <EventList items={events} />
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const events: DUMMY_EVENT[] = await getAllEvents();
+  
+  return {
+    props: {
+      events
+    }
+  }
 }
 
 export default Events;
