@@ -5,6 +5,7 @@ import EventSummary from '../../components/event-detail/EventSummary';
 import { getAllEvents, getEventById } from '../../helpers/api-utils';
 import type { DUMMY_EVENT } from '../../helpers/api-utils';
 import ErrorAlert from '../../components/ui/ErrorAlert';
+import Comments from '../../components/input/Comments';
 
 const EventDetailPage: NextPage<{
   selectedEvent: DUMMY_EVENT
@@ -17,6 +18,7 @@ const EventDetailPage: NextPage<{
         <EventContent>
           <p>{event.description}</p>
         </EventContent>
+        <Comments eventId={event.id} />
       </>
       :
       <>
