@@ -1,7 +1,9 @@
 import { FormEvent, useRef, useState } from 'react';
 import classes from './NewComment.module.css';
 
-function NewComment(props: { onAddComment: (comment: { email: string; name: string; text: string; }) => void; }) {
+function NewComment(props: {
+  onAddComment: (comment: { email: string; name: string; text: string; }) => void;
+}) {
   const [isInvalid, setIsInvalid] = useState(false);
 
   const emailInputRef = useRef<HTMLInputElement>(null);
