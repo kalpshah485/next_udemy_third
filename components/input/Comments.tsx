@@ -45,6 +45,7 @@ function Comments(props: { eventId: any; }) {
           })
         })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventId, showComments]);
 
   function toggleCommentsHandler() {
